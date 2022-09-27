@@ -1,7 +1,8 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+require('dotenv').config()
 const { Schema } = mongoose;
 
-const filmLocationSchema = new Schema({
+const FilmLocationSchema = new Schema({
     filmType: String,
     filmProducerName: String,
     endDate: Date,
@@ -9,7 +10,6 @@ const filmLocationSchema = new Schema({
     district: Number,
     geolocation: {
         coordinates: [
-            Number,
             Number
         ],
         type: String
@@ -20,3 +20,8 @@ const filmLocationSchema = new Schema({
     startDate: Date,
     year: Number,
 });
+
+const Location = mongoose.model('Location', FilmLocationSchema);
+
+
+mongoose.connect(process.env.MONGO_URI).then((success)=> console.log("connecté à mongoDB"))
